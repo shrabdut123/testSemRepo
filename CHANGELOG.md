@@ -1,3 +1,12 @@
+## [3.0.0](https://github.com/shrabdut123/testSemRepo/compare/v2.0.0...v3.0.0) (2023-05-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* added comma
+
+* Merge pull request #9 from shrabdut123/changedPortAgain ([f139b08](https://github.com/shrabdut123/testSemRepo/commit/f139b085a69ab310f80d130d4eb5d4fa0a8e1555)), closes [#9](https://github.com/shrabdut123/testSemRepo/issues/9)
+
 ## [2.0.0](https://github.com/shrabdut123/testSemRepo/compare/v1.0.0...v2.0.0) (2023-05-08)
 
 
