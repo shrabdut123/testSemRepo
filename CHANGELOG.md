@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/shrabdut123/testSemRepo/compare/v3.0.0...v3.0.1) (2023-05-08)
+
+
+### :bug: Bug Fixes
+
+* updated port ([2148369](https://github.com/shrabdut123/testSemRepo/commit/2148369d7c025f51eb355c24a83960e2e1cfc6e1))
+
 ## [3.0.0](https://github.com/shrabdut123/testSemRepo/compare/v2.0.0...v3.0.0) (2023-05-08)
 
 
