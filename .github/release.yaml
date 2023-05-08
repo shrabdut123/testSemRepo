@@ -1,0 +1,43 @@
+name: Release
+on: workflow_dispatch
+
+jobs:
+  # <--------------- RUN SEMANTIC RELEASE ---------------->
+  release:
+    name: Semantic Release
+    runs-on: ubuntu-latest
+    outputs:
+      new_release_published: ${{ steps.semantic-release.outputs.new_release_published }}
+      new_release_version: ${{ steps.semantic-release.outputs.new_release_version }}
+      new_release_notes: ${{ steps.semantic-release.outputs.new_release_notes }}
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v3
+
+      - name: Slugify github variables
+        uses: rlespinasse/github-slug-action@v4.4.1
+
+      - name: Semantic Release
+        id: semantic-release
+        uses: cycjimmy/semantic-release-action@v3.4.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          branches: master
+          dry_run: false
+          extra_plugins: |
+            @semantic-release/changelog
+            @semantic-release/git
+            conventional-changelog-conventionalcommits
+            @semantic-release/exec
+
+      - name: Success summary
+        if: ${{ steps.semantic-release.outputs.new_release_published == 'true' }}
+        run: |
+          echo "
+          ### :bookmark: ✅ New release created (${{ steps.semantic-release.outputs.new_release_version }})
+
+          **Release Notes:**
+
+          ${{ steps.semantic-release.outputs.new_release_notes }}
+          " >> $GITHUB_STEP_SUMMARY
