@@ -23,7 +23,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          branches: master
+          semantic_version: 19.0.5
+          branches: main
           dry_run: false
           extra_plugins: |
             @semantic-release/changelog
