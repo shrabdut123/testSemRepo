@@ -1,3 +1,10 @@
+## [3.0.3](https://github.com/shrabdut123/testSemRepo/compare/v3.0.2...v3.0.3) (2023-05-09)
+
+
+### :package: Maintenance
+
+* update script ([3e47932](https://github.com/shrabdut123/testSemRepo/commit/3e479327c53d3a5b908b85b1feb2ff9171c7a5ad))
+
 ## [3.0.2](https://github.com/shrabdut123/testSemRepo/compare/v3.0.1...v3.0.2) (2023-05-09)
 
 
