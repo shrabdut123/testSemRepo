@@ -45,7 +45,7 @@
               {
                 "type": "test",
                 "section": ":white_check_mark: Tests",
-                "hidden": true
+                "hidden": false
               },
               {
                 "type": "ci",
