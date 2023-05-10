@@ -20,12 +20,12 @@
               {
                 "type": "feat",
                 "section": ":sparkles: New Features",
-                "hidden": false
+                "hidden": true
               },
               {
                 "type": "fix",
                 "section": ":bug: Bug Fixes",
-                "hidden": false
+                "hidden": true
               },
               {
                 "type": "docs",
