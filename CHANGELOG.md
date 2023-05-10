@@ -1,3 +1,13 @@
+## [3.0.4](https://github.com/shrabdut123/testSemRepo/compare/v3.0.3...v3.0.4) (2023-05-10)
+
+
+### :white_check_mark: Tests
+
+* add another test file ([ee42371](https://github.com/shrabdut123/testSemRepo/commit/ee42371dff06778261cb40c97ba3cce35f528927))
+* add yest another test file ([7669087](https://github.com/shrabdut123/testSemRepo/commit/7669087de5924c502956b7a4bd120bf3a9c6e95d))
+* add yest another test file2 ([e592346](https://github.com/shrabdut123/testSemRepo/commit/e592346238be2379e3ed881d2fd0da86fabcc908))
+* add yest another test file3 ([2ebe4ab](https://github.com/shrabdut123/testSemRepo/commit/2ebe4ab7115929c22b16e49b64e0855803a4519c))
+
 ## [3.0.3](https://github.com/shrabdut123/testSemRepo/compare/v3.0.2...v3.0.3) (2023-05-09)
 
 
