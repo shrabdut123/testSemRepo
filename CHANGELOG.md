@@ -1,3 +1,5 @@
+## [3.2.0](https://github.com/shrabdut123/testSemRepo/compare/v3.1.0...v3.2.0) (2023-05-27)
+
 ## [3.1.0](https://github.com/shrabdut123/testSemRepo/compare/v3.0.4...v3.1.0) (2023-05-27)
 
 
