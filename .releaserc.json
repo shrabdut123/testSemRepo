@@ -7,6 +7,30 @@
             {
               "type": "chore",
               "release": "patch"
+            },
+            {
+              "type": "test",
+              "release": "patch"
+            },
+            {
+              "type": "perf",
+              "release": "patch"
+            },
+            {
+              "type": "docs",
+              "release": "patch"
+            },
+            {
+              "type": "ci",
+              "release": "minor"
+            },
+            {
+              "type": "build",
+              "release": "minor"
+            },
+            {
+              "type": "refactor",
+              "release": "patch"
             }
           ]
         }
