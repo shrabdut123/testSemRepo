@@ -2,7 +2,7 @@ name: Release
 on: workflow_dispatch
 
 jobs:
-  # <--------------- RUN SEMANTIC RELEASE UPDATES---------------->
+  # <--------------- RUN SEMANTIC RELEASE UPDATES HERE--------------->
   release:
     name: Semantic Release
     runs-on: ubuntu-latest
