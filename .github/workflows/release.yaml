@@ -2,7 +2,7 @@ name: Release
 on: workflow_dispatch
 
 jobs:
-  # <--------------- RUN SEMANTIC RELEASE UPDATE---------------->
+  # <--------------- RUN SEMANTIC RELEASE UPDATES---------------->
   release:
     name: Semantic Release
     runs-on: ubuntu-latest
@@ -16,6 +16,8 @@ jobs:
 
       - name: Slugify github variables
         uses: rlespinasse/github-slug-action@v4.4.1
+
+      - uses: wagoid/commitlint-github-action@v5
 
       - name: Semantic Release
         id: semantic-release
