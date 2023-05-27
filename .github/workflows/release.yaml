@@ -17,8 +17,11 @@ jobs:
       - name: Slugify github variables
         uses: rlespinasse/github-slug-action@v4.4.1
 
-      - uses: wagoid/commitlint-github-action@v5
-
+      - uses: wagoid/commitlint-github-action@v1
+        with:
+          configFile: './commitlint.config.js'
+          firstParent: false
+          failOnWarnings: true
       - name: Semantic Release
         id: semantic-release
         uses: cycjimmy/semantic-release-action@v3.4.2
