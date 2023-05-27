@@ -1,3 +1,11 @@
+## [3.1.0](https://github.com/shrabdut123/testSemRepo/compare/v3.0.4...v3.1.0) (2023-05-27)
+
+
+### :white_check_mark: Tests
+
+* add new demo test ([d39c21d](https://github.com/shrabdut123/testSemRepo/commit/d39c21d7b367ad89b9dd93faeae6c95f577687f2))
+* remove tests ([066de4a](https://github.com/shrabdut123/testSemRepo/commit/066de4a6bea7ba6b082fdbc45d3ef2b2a5aecbb1))
+
 ## [3.0.4](https://github.com/shrabdut123/testSemRepo/compare/v3.0.3...v3.0.4) (2023-05-10)
 
 
