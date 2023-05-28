@@ -71,7 +71,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npx commitlint"
+      "post-commit": "npx commitlint"
     }
   },
   "repository": {
