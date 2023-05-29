@@ -1,9 +1,9 @@
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = 3002;
 
 app.get("/", (req, res) => {
-  res.send("Hello All to Semantics !!!!!");
+  res.send("Hello All to Semantics !!!");
 });
 
 app.listen(port, () => {
