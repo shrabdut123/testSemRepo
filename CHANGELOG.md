@@ -1,3 +1,12 @@
+## [4.0.0](https://github.com/shrabdut123/testSemRepo/compare/v3.4.0...v4.0.0) (2023-05-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* use port number 3002
+
+* Merge pull request #33 from shrabdut123/missing_type ([dacbe0b](https://github.com/shrabdut123/testSemRepo/commit/dacbe0b44a6d90a2aed9e833ba6e4ee58e9c36c2)), closes [#33](https://github.com/shrabdut123/testSemRepo/issues/33)
+
 ## [3.4.0](https://github.com/shrabdut123/testSemRepo/compare/v3.3.0...v3.4.0) (2023-05-29)
 
 
