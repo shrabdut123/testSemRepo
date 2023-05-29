@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 3002;
+const port = 3005;
 
 app.get("/", (req, res) => {
   res.send("Hello All to Semantics !!!");
