@@ -5,3 +5,7 @@
 'commit type fix'
 
 'commit type feat'
+
+'commit type chore'
+
+'commit type ci'
