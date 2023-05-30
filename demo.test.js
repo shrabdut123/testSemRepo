@@ -3,3 +3,5 @@
 'commit type test'
 
 'commit type fix'
+
+'commit type feat'
