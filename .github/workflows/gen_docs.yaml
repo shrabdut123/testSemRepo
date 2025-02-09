@@ -17,7 +17,7 @@ jobs:
 
       - name: Generate Docs
         run: |
-          python /Users/shrabani.dutta1/salpay/testSemRepo/generate_docs.py
+          python generate_docs.py
 
       - name: Commit changes
         run: |
