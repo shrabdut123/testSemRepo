@@ -73,7 +73,7 @@ fun createOrderRequest(
                     totalAmount = summaryPrice.exclSavings.totalAmount(currencyCode),
                 ),
             savings = 0,
-            couponsInformation = null,
+            couponsInformation = 0,
         )
 
     val orderPayment =

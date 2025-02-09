@@ -38,12 +38,18 @@ def process_files():
                 code = f.read()
             
             # Get Copilot-generated documentation
-            updated_code = copilot_edit(code)
-            
-            with open(file_path, "w") as f:
-                f.write(updated_code)
-            
-            print(f"✅ Updated {file_name} with Copilot edits.")
+            # Get Copilot-generated documentation
+        updated_code = copilot_edit(code)
+
+        # Print the original and updated code for comparison
+        print(f"\n📝 Original Code ({file_name}):\n{'-'*50}\n{code}\n")
+        print(f"\n🚀 Updated Code ({file_name}):\n{'-'*50}\n{updated_code}\n")
+
+        # Write the updated code back to the file
+        with open(file_path, "w") as f:
+            f.write(updated_code)
+
+        print(f"✅ Successfully updated {file_name} with Copilot edits.\n")
 
 if __name__ == "__main__":
     process_files()
