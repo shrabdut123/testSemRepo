@@ -1,38 +1,34 @@
-name: Auto-Generate Kotlin Docs
+name: Auto-Generate Docs with Copilot
 on:
   push:
     paths:
-      - "src/**/*.kt"
+      - "src/**/*.kt"  # Run when Kotlin files change
 
 jobs:
   generate_docs:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install Ollama
-        run: |
-          curl -fsSL https://ollama.com/install.sh | sh
-          ollama serve &  # Start Ollama in the background
-          sleep 5  # Give it time to start
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
 
-      - name: Pull CodeGemma Model
-        run: |
-          ollama pull codegemma  # Ensure model is available
+      - name: Install dependencies
+        run: pip install requests
 
-      - name: Install Python Dependencies
-        run: |
-          pip install ollama
-
-      - name: Generate Docs
-        run: |
-          python generate_docs.py
+      - name: Generate Documentation with Copilot
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}  # Store token in GitHub Secrets
+        run: python generate_docs.py
 
       - name: Commit and Push Changes
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           git add .
-          git commit -m "Auto-generated Kotlin documentation"
+          git commit -m "Auto-generated documentation with GitHub Copilot" || echo "No changes to commit"
           git push

@@ -115,7 +115,7 @@ fun createOrderRequest(
         orderKey = SalesOrderKey(orderNumberId, orderNumberSource, OrderKeyType.ISELL),
         businessUnitKey = BusinessUnitKey(storeId, "STO"),
         orderReferences = listOf(OrderReference("", "Checkout-Services")),
-        clientSystem = ClientSystem(consumerName, "1.0", null),
+        clientSystem = ClientSystem(consumerName, "1.1", null),
         itemLines = items.map { (speItem, reservationId) -> speItem.toItemLine(currencyCode, reservationId) },
         countryCode = countryCode.uppercase(),
         orderCreationDateTime = null,
