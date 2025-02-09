@@ -11,7 +11,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install Python & Dependencies
+      - name: Install Ollama
+        run: |
+          curl -fsSL https://ollama.com/install.sh | sh
+          ollama serve &  # Start Ollama in the background
+          sleep 5  # Give it time to start
+
+      - name: Pull CodeGemma Model
+        run: |
+          ollama pull codegemma  # Ensure model is available
+
+      - name: Install Python Dependencies
         run: |
           pip install ollama
 
@@ -19,7 +29,7 @@ jobs:
         run: |
           python generate_docs.py
 
-      - name: Commit changes
+      - name: Commit and Push Changes
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"

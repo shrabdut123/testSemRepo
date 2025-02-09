@@ -1,30 +1,49 @@
-import ollama
 import os
+import requests
 
-def generate_docs(file_path):
-    with open(file_path, "r") as f:
-        content = f.read()
-    
-    prompt = f"Generate documentation for this Kotlin code:\n\n{content}"
-    
-    response = ollama.chat(
-        model="codegemma",
-        messages=[{"role": "user", "content": prompt}]
-    )
-    
-    docs = response["message"]["content"]
-    
-    # Write documentation at the top of the file
-    with open(file_path, "w") as f:
-        f.write(f"/* {docs} */\n\n{content}")
+SRC_FOLDER = "src"
+# Read GitHub Token from environment variable
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 
-def process_folder(folder_path):
-    for root, _, files in os.walk(folder_path):
-        for file in files:
-            if file.endswith(".kt"):  # Process only Kotlin files
-                file_path = os.path.join(root, file)
-                print(f"📄 Processing: {file_path}")
-                generate_docs(file_path)
+if not GITHUB_TOKEN:
+    raise ValueError("❌ GITHUB_TOKEN is not set. Ensure it is passed from GitHub Actions.")
 
-# Run for all Kotlin files in 'src/' folder
-process_folder("src")
+
+HEADERS = {
+    "Authorization": f"Bearer {GITHUB_TOKEN}",
+    "Accept": "application/vnd.github+json"
+}
+def copilot_edit(code):
+    """Use GitHub Copilot to generate documentation for the given code."""
+    url = "https://api.github.com/copilot/v1/edits"
+    payload = {
+        "prompt": "Add detailed documentation comments to this Kotlin function.",
+        "code": code,
+        "temperature": 0.3  # Lower value for consistent edits
+    }
+    response = requests.post(url, json=payload, headers=HEADERS)
+    
+    if response.status_code == 200:
+        return response.json().get("edited", code)  # Return edited code or original
+    else:
+        print(f"❌ Error: {response.json()}")
+        return code
+
+def process_files():
+    """Iterate over Kotlin files and add Copilot-generated documentation."""
+    for file_name in os.listdir(SRC_FOLDER):
+        if file_name.endswith(".kt"):
+            file_path = os.path.join(SRC_FOLDER, file_name)
+            with open(file_path, "r") as f:
+                code = f.read()
+            
+            # Get Copilot-generated documentation
+            updated_code = copilot_edit(code)
+            
+            with open(file_path, "w") as f:
+                f.write(updated_code)
+            
+            print(f"✅ Updated {file_name} with Copilot edits.")
+
+if __name__ == "__main__":
+    process_files()
