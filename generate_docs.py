@@ -40,11 +40,7 @@ def process_files():
             # Get Copilot-generated documentation
             # Get Copilot-generated documentation
         updated_code = copilot_edit(code)
-
-        # Print the original and updated code for comparison
-        print(f"\n📝 Original Code ({file_name}):\n{'-'*50}\n{code}\n")
-        print(f"\n🚀 Updated Code ({file_name}):\n{'-'*50}\n{updated_code}\n")
-
+        print(f"\n🔄 Copilot Response:\n{updated_code}\n")       
         # Write the updated code back to the file
         with open(file_path, "w") as f:
             f.write(updated_code)
