@@ -1,21 +1,21 @@
-name: Run FastAPI on Custom Port (8081) and Update PR Files
+name: Run FastAPI and Process Files
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
-  workflow_dispatch:  # Allow manual trigger
+  workflow_dispatch:
 
 jobs:
-  run-server-and-update:
+  run-server-and-process:
     runs-on: ubuntu-latest
     
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          persist-credentials: true  # Ensure GitHub token is available
-          fetch-depth: 0  # Get full history
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -27,33 +27,23 @@ jobs:
           python -m pip install --upgrade pip
           pip install fastapi uvicorn ollama
 
-      - name: Kill any process using port 8081 (if running)
+      - name: Kill any process using port 8081
         run: |
-          PID=$(lsof -ti :8081) || true
-          if [ ! -z "$PID" ]; then
-            echo "🔴 Killing process on port 8081 (PID: $PID)"
-            kill -9 $PID
-            sleep 3  # Wait for the process to release the port
-          fi
+           while sudo lsof -ti :8081; do
+            sudo kill -9 $(sudo lsof -ti :8081)
+            sleep 1
+           done
+           sleep 5  # Wait for the port to be fully released
 
-      - name: Verify port is free
+      - name: Start FastAPI server
         run: |
-          if lsof -ti :8081; then
-            echo "⚠️ Port 8081 is still in use. Exiting..."
-            exit 1
-          else
-            echo "✅ Port 8081 is free."
-          fi
-
-      - name: Start FastAPI server on port 8081
-        run: |
-          nohup uvicorn server:app --host 0.0.0.0 --port 8081 > server.log 2>&1 &
+          nohup uvicorn server:app --host 0.0.0.0 --port 8081 &
 
       - name: Wait for server to start
         run: sleep 5
 
       - name: Run Process Files
-        run: python server.py  # This should process and update files
+        run: python server1.py
 
       - name: Commit and Push Changes
         run: |

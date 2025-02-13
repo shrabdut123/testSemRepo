@@ -2,10 +2,17 @@ from fastapi import FastAPI
 import subprocess
 import os
 import ollama
+import socket
 
 app = FastAPI()
 
 SRC_FOLDER = "src"
+
+def find_free_port():
+    """Find an available port dynamically."""
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.bind(('', 0))  # Bind to an available port
+        return s.getsockname()[1]
 
 @app.get("/generate")
 def generate(prompt: str):
@@ -44,4 +51,6 @@ def process_files():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8081)
+    port = find_free_port()  # Get a free port
+    print(f"Starting FastAPI server on port {port}")
+    uvicorn.run(app, host="0.0.0.0", port=port)
