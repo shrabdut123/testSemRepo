@@ -1,33 +1,11 @@
 import os
-import requests
 
 SRC_FOLDER = "src"
-# Read GitHub Token from environment variable
-GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
-
-if not GITHUB_TOKEN:
-    raise ValueError("❌ GITHUB_TOKEN is not set. Ensure it is passed from GitHub Actions.")
-
-
-HEADERS = {
-    "Authorization": f"Bearer {GITHUB_TOKEN}",
-    "Accept": "application/vnd.github+json"
-}
-def copilot_edit(code):
+def ollama_edit(code):
     """Use GitHub Copilot to generate documentation for the given code."""
-    url = "https://api.github.com/copilot/v1/edits"
-    payload = {
-        "prompt": "Add detailed documentation comments to this Kotlin function.",
-        "code": code,
-        "temperature": 0.3  # Lower value for consistent edits
-    }
-    response = requests.post(url, json=payload, headers=HEADERS)
-    
-    if response.status_code == 200:
-        return response.json().get("edited", code)  # Return edited code or original
-    else:
-        print(f"❌ Error: {response.json()}")
-        return code
+    prompt = f"Generate documentation for the following Kotlin code:\n{file_content}"
+    response = ollama.chat(model="codegemma", messages=[{"role": "user", "content": prompt}])
+    return response["message"]["content"]
 
 def process_files():
     """Iterate over Kotlin files and add Copilot-generated documentation."""
@@ -39,7 +17,7 @@ def process_files():
             
             # Get Copilot-generated documentation
             # Get Copilot-generated documentation
-        updated_code = copilot_edit(code)
+        updated_code = ollama_edit(code)
         print(f"\n🔄 Copilot Response:\n{updated_code}\n")       
         # Write the updated code back to the file
         with open(file_path, "w") as f:
