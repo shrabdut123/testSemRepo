@@ -52,5 +52,8 @@ def process_files():
 if __name__ == "__main__":
     import uvicorn
     port = find_free_port()  # Get a free port
+    # Write the port to a file or environment variable
+    with open("port.txt", "w") as f:
+        f.write(str(port))
     print(f"Starting FastAPI server on port {port}")
     uvicorn.run(app, host="0.0.0.0", port=port)

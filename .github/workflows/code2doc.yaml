@@ -37,7 +37,11 @@ jobs:
 
       - name: Start FastAPI server
         run: |
-          nohup uvicorn server:app --host 0.0.0.0 --port 8081 &
+          python server1.py &
+          echo "Waiting for server to start..."
+          sleep 5
+          PORT=$(cat port.txt)
+          echo "Server is running on port $PORT"
 
       - name: Wait for server to start
         run: sleep 5
