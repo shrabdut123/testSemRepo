@@ -7,7 +7,7 @@ on:
   pull_request:
     branches:
       - main
-  workflow_dispatch:  # Allows manual trigger
+  workflow_dispatch:
 
 jobs:
   run-server-and-process:
@@ -27,12 +27,28 @@ jobs:
           python -m pip install --upgrade pip
           pip install fastapi uvicorn ollama
 
+      - name: Kill any process using port 8081
+        run: |
+          PID=$(lsof -ti :8081) || true
+          if [ ! -z "$PID" ]; then
+            echo "🔴 Killing process on port 8081 (PID: $PID)"
+            kill -9 $PID
+          fi
+
       - name: Start FastAPI server
         run: |
-          nohup uvicorn server:app --host 0.0.0.0 --port 8000 &
+          nohup uvicorn server:app --host 0.0.0.0 --port 8081 &
 
       - name: Wait for server to start
-        run: sleep 5  # Ensure FastAPI starts before calling process_files
+        run: sleep 5
 
       - name: Run Process Files
-        run: python server1.py  # This should trigger process_files() in your script
+        run: python server1.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "🔄 Auto-update Kotlin files with Copilot edits" || echo "No changes to commit"
+          git push origin HEAD:${{ github.head_ref }}
