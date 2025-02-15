@@ -35,10 +35,37 @@ jobs:
         run: |
           python code2doc_azai_code.py
 
-      - name: Commit and Push Changes
+      - name: Check if any files changed
+        id: check_changes
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          if [[ -s updated_files.txt ]]; then
+            echo "changes_detected=true" >> $GITHUB_ENV
+          else
+            echo "changes_detected=false" >> $GITHUB_ENV
+          fi
+
+      - name: Commit and push changes
+        if: env.changes_detected == 'true'
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git checkout -b automated-doc-update
           git add .
-          git commit -m "🔄 Auto-update Kotlin files with Copilot edits" || echo "No changes to commit"
-          git push origin HEAD:${{ github.head_ref }}
+          git commit -m "Automated documentation update"
+          git push origin automated-doc-update
+
+      - name: Create Pull Request
+        if: env.changes_detected == 'true'
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { owner, repo } = context.repo;
+            github.rest.pulls.create({
+              owner,
+              repo,
+              title: "Automated Documentation Update",
+              body: "This PR includes automated documentation updates for Kotlin functions.",
+              head: "automated-doc-update",
+              base: "main"
+            });

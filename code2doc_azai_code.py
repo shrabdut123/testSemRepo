@@ -15,26 +15,42 @@ openai.api_base = AZURE_OPENAI_ENDPOINT
 openai.api_key = AZURE_OPENAI_API_KEY
 openai.api_type = "azure"
 openai.api_version = "2024-05-01-preview"  # Adjust based on the latest available version
-code = """
-suspend fun fetchFullServeTimeWindows(
-        retailUnit: String,
-        countryCode: String,
-        storeId: String,
-        requestedItems: Map<ItemNo, Float>,
-    ): CheckoutTimeWindowsResponse {
-        val fullServeArticles = getFullServeArticles(requestedItems, storeId, countryCode)
-        val deliveryArrangementResponse = getDeliveryArrangements(retailUnit, countryCode, storeId, fullServeArticles)
-        val timeWindowsResponse = getTimeWindows(retailUnit, deliveryArrangementResponse)
-        saveDeliveryData(deliveryArrangementResponse, timeWindowsResponse)
-        return timeWindowsResponse
-    }
-"""
-# Chat prompt
-prompt = f"Generate documentation for the following Kotlin code:\n{code}"
-messages=[{"role": "user", "content": prompt}]
+SRC_FOLDER = "src"
 
-# Call Azure OpenAI API directly
-response = openai.ChatCompletion.create(
+# Function to generate documentation
+def generate_documentation(code):
+    prompt = f"""
+    Generate detailed documentation for the following Kotlin function using the standard format:
+
+    ## Overview
+    Provide a brief description of what the function does.
+
+    ## Function Signature
+    Format the function signature as a code block.
+
+    ## Parameters
+    List all parameters with descriptions.
+
+    ## Return Value
+    Describe the return type and what it represents.
+
+    ## Functionality
+    Break down the key steps in the function.
+
+    ## Usage Example
+    Provide a sample Kotlin usage example.
+
+    Here is the function:
+
+    ```kotlin
+    {code}
+    ```
+    """
+    
+    messages = [{"role": "user", "content": prompt}]
+    
+    # Call Azure OpenAI API directly
+    response = openai.ChatCompletion.create(
     engine=DEPLOYMENT_NAME,
     messages=messages,
     max_tokens=800,
@@ -43,7 +59,39 @@ response = openai.ChatCompletion.create(
     frequency_penalty=0,
     presence_penalty=0,
     stop=None,
-)
+    )
 
-# Print response
-print(response["choices"][0]["message"]["content"])
+    return response.choices[0].message.content
+
+# Function to traverse files and update documentation
+def traverse_and_update_files():
+    updated_files = []
+    
+    for dirpath, _, filenames in os.walk(SRC_FOLDER):
+        for file_name in filenames:
+            if file_name.endswith(".kt"):  # Process only Kotlin files
+                file_path = os.path.join(dirpath, file_name)
+                
+                with open(file_path, "r") as f:
+                    code = f.read()
+
+                # Generate new documentation
+                documentation = generate_documentation(code)
+                
+                # Append the generated documentation at the beginning of the file
+                updated_code = f"/*\n{documentation}\n*/\n{code}"
+
+                # Write updated code back to the file
+                with open(file_path, "w") as f:
+                    f.write(updated_code)
+
+                updated_files.append(file_path)
+
+    return updated_files
+
+    if __name__ == "__main__":
+        updated_files = traverse_and_update_files()
+        if updated_files:
+            print(f"Updated {len(updated_files)} files. Changes will be committed in the workflow.")
+        else:
+            print("No files were updated.")
