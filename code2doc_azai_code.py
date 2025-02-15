@@ -86,6 +86,10 @@ def traverse_and_update_files():
                     f.write(updated_code)
 
                 updated_files.append(file_path)
+    
+    # Save the list of updated files for GitHub Actions
+    with open("updated_files.txt", "w") as f:
+        f.writelines("\n".join(updated_files))
 
     return updated_files
 
