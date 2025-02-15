@@ -1,3 +1,85 @@
+/*
+## Overview
+
+The `createOrderRequest` function constructs an `OrderCreationRequest` object by processing various input parameters related to order details, customer information, and delivery arrangements. This function primarily facilitates the creation of an order request by aggregating and transforming the provided information into a structured format necessary for order processing in a sales system.
+
+## Function Signature
+
+```kotlin
+fun createOrderRequest(
+    items: List<Pair<SpeCartItem, ReservationId>>,
+    productTotal: SpeCartOrderSubtotalPrice,
+    summaryPrice: SpeCartSummary,
+    currencyCode: String,
+    orderNumberId: String,
+    orderNumberSource: String,
+    contactDetails: ContactDetails,
+    countryCode: String,
+    languageCode: String,
+    storeId: String,
+    consumerName: String,
+    selectedTimeWindow: CheckoutTimeWindowsResponse?,
+    deliveryArrangementsResponse: CheckoutDeliveryArrangementsResponse?,
+    checkoutTimeWindowId: String?,
+    deliveryPrice: SpeCartOrderSubtotalPrice?,
+): OrderCreationRequest
+```
+
+## Parameters
+
+- `items`: `List<Pair<SpeCartItem, ReservationId>>` - A list of pairs, where each pair consists of a shopping cart item and its associated reservation ID.
+
+- `productTotal`: `SpeCartOrderSubtotalPrice` - Contains the subtotal price information of the products in the cart, including savings.
+
+- `summaryPrice`: `SpeCartSummary` - Provides a summary of the cart's pricing details, including total amounts with and without savings.
+
+- `currencyCode`: `String` - The currency code representing the currency used for the transaction.
+
+- `orderNumberId`: `String` - The unique identifier for the order number.
+
+- `orderNumberSource`: `String` - The source of the order number, indicating its origin.
+
+- `contactDetails`: `ContactDetails` - Contains the contact details of the customer, such as email and mobile number.
+
+- `countryCode`: `String` - The ISO country code representing the customer's country.
+
+- `languageCode`: `String` - The language code representing the customer's preferred language.
+
+- `storeId`: `String` - The unique identifier for the store processing the order.
+
+- `consumerName`: `String` - The name of the consumer placing the order.
+
+- `selectedTimeWindow`: `CheckoutTimeWindowsResponse?` - An optional parameter representing the selected delivery time window.
+
+- `deliveryArrangementsResponse`: `CheckoutDeliveryArrangementsResponse?` - An optional parameter containing delivery arrangement details.
+
+- `checkoutTimeWindowId`: `String?` - An optional identifier for the selected checkout time window.
+
+- `deliveryPrice`: `SpeCartOrderSubtotalPrice?` - An optional parameter containing the delivery price information.
+
+## Return Value
+
+The function returns an `OrderCreationRequest` object. This object encapsulates all necessary order details, including item lines, payment information, customer notifications, delivery arrangements, and reservations, structured for order creation and processing.
+
+## Functionality
+
+1. **Order Summary Construction**: 
+   - Constructs an `OrderSummary` object by creating both `OrderSummaryInclSavings` and `OrderSummaryExclSavings` using the provided `productTotal` and `summaryPrice`.
+
+2. **Order Payment Setup**:
+   - Creates an `OrderPayment` object if the inclusive tax price is available in `productTotal`.
+
+3. **Customer Notifications**:
+   - Builds a `Customer` object with notifications based on available contact details (email and mobile number).
+
+4. **Delivery Arrangement Creation**:
+   - Conditionally creates a delivery arrangement using the `createDeliveryArrangements` function if all necessary parameters (`deliveryArrangementsResponse`, `selectedTimeWindow`, `checkoutTimeWindowId`) are provided.
+
+5. **Order Request Composition**:
+   - Compiles all the constructed objects and parameters into an `OrderCreationRequest` object, including order references, client system details, item lines, and reservations.
+
+
+*/
 package fullserve.adapters.orders
 
 import com.ingka.selling.orders.model.BusinessUnitKey

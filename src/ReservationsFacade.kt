@@ -1,3 +1,86 @@
+/*
+## Overview
+
+The `reserveArticles` function is part of the `ReservationsFacade` class in the `fullserve.adapters.reservations` package. It is responsible for reserving a collection of articles for a specific order at a designated store. The function interacts with a reservations client to create reservations, and it handles scenarios where reservations fail by attempting to cancel any successful reservations and throwing a custom exception if not all items are reserved.
+
+## Function Signature
+
+```kotlin
+suspend fun reserveArticles(
+    orderNumber: OrderNumber,
+    articles: Collection<FullServeArticle>,
+    storeId: String
+): List<ReservedFullServeArticle>
+```
+
+## Parameters
+
+- `orderNumber: OrderNumber`  
+  A unique identifier representing the order for which reservations are being made.
+
+- `articles: Collection<FullServeArticle>`  
+  A collection of `FullServeArticle` objects that need to be reserved.
+
+- `storeId: String`  
+  The identifier for the store where the reservations are to be made.
+
+## Return Value
+
+The function returns a `List<ReservedFullServeArticle>`, where each `ReservedFullServeArticle` contains the article that was reserved and its associated reservation ID. This list represents the articles that have been successfully reserved.
+
+## Functionality
+
+1. **Transform Articles to Reservation Requests**:  
+   Each article in the provided collection is transformed into an `ItemReservationRequest`, which includes details such as item number, unit of measure, quantity, availability check, and an expiry date/time.
+
+2. **Create Reservation Request**:  
+   A `ReservationRequest` object is created using the list of `ItemReservationRequest` objects.
+
+3. **Send Reservation Request**:  
+   The function sends the reservation request to the `ReservationsClient`, using the specified store ID, order number, and a token from the `TokenHeaderProvider`.
+
+4. **Handle Reservation Results**:  
+   - The results are partitioned into reserved and not reserved items.
+   - If some items are not reserved, the function attempts to cancel any reservations that were successful.
+   - It then prepares an error map detailing why certain items could not be reserved.
+
+5. **Error Handling**:  
+   If not all items are reserved or if a `ReservationsClientException` occurs, a `NotAllItemsReservedException` is thrown with details on the failure reasons.
+
+6. **Return Reserved Articles**:  
+   For successfully reserved items, the function constructs and returns a list of `ReservedFullServeArticle` objects.
+
+## Usage Example
+
+```kotlin
+import com.ingka.selling.key.provider.model.OrderNumber
+import fullserve.service.FullServeArticle
+
+suspend fun main() {
+    val reservationsClient = // Initialize ReservationsClient
+    val tokenProvider = // Initialize TokenHeaderProvider
+    val reservationsFacade = ReservationsFacade(reservationsClient, tokenProvider)
+
+    val orderNumber = OrderNumber("123456789")
+    val articles = listOf(
+        FullServeArticle(itemNo = "001", unitOfMeasure = "PCS", quantity = 10),
+        FullServeArticle(itemNo = "002", unitOfMeasure = "PCS", quantity = 5)
+    )
+    val storeId = "Store001"
+
+    try {
+        val reservedArticles = reservationsFacade.reserveArticles(orderNumber, articles, storeId)
+        reservedArticles.forEach {
+            println("Reserved Article: ${it.article.itemNo}, Reservation ID: ${it.reservationId.value}")
+        }
+    } catch (e: NotAllItemsReservedException) {
+        println("Failed to reserve all items: ${e.failureReasons}")
+    }
+}
+```
+
+This example demonstrates how to use the `reserveArticles` function to reserve a collection of articles for a specific order at a store, handling any exceptions that may arise if not all items can be reserved.
+*/
 package fullserve.adapters.reservations
 
 import com.ingka.selling.key.provider.model.OrderNumber
