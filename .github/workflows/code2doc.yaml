@@ -22,13 +22,18 @@ jobs:
         with:
           python-version: "3.10"
 
+    # Install dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install fastapi uvicorn ollama
+          pip install openai==0.28
 
-      - name: Run Process Files
-        run: python server1.py
+      # Run the Python script
+      - name: Run code2doc script
+        env:
+          AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_OPENAI_API_KEY }}  # Pass the secret to the script
+        run: |
+          python code2doc_azai_code.py
 
       - name: Commit and Push Changes
         run: |
