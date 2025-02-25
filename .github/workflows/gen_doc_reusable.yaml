@@ -7,7 +7,12 @@ permissions:
   actions: 'write'
 
 jobs:
-  generate-docs:
-    uses: ingka-group-digital/code-to-docs/.github/workflows/reusable-workflow.yml@main
-    with:
-      token: ${{ secrets.PAT_TOKEN }}
+  trigger-workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Workflow via API
+        run: |
+          curl -X POST -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
+            https://api.github.com/repos/ingka-group-digital/code-to-docs/actions/workflows/reusable-workflow.yml/dispatches \
+            -d '{"ref":"main"}'
