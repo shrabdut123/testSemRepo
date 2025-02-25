@@ -1,0 +1,13 @@
+name: Generate Documentation
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: 'read'
+  actions: 'write'
+
+jobs:
+  generate-docs:
+    uses: ingka-group-digital/code-to-docs/.github/workflows/reusable-workflow.yml@main
+    with:
+      token: ${{ secrets.PAT_TOKEN }}
