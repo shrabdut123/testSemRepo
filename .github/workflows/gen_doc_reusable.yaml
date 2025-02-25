@@ -10,9 +10,13 @@ jobs:
   trigger-workflow:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Debug Repository Structure
+        run: ls -R ${{ github.workspace }}
       - name: Call Workflow via API
         run: |
           curl -X POST -H "Accept: application/vnd.github.v3+json" \
             -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
             https://api.github.com/repos/ingka-group-digital/code-to-docs/actions/workflows/reusable-workflow.yml/dispatches \
-            -d '{"ref":"main"}'
+            -d '{"ref":"main", "inputs": {"src-folder": "${{ github.workspace }}/src"}}'
