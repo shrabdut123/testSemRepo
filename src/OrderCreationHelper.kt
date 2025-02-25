@@ -1,3 +1,94 @@
+/*
+## Overview
+The `createOrderRequest` function constructs and returns an `OrderCreationRequest` object based on the provided order details, customer information, and optional delivery arrangements. It utilizes various models and helper functions to transform and organize the input data into a comprehensive order request structure suitable for further processing or submission.
+
+## Function Signature
+```kotlin
+fun createOrderRequest(
+    items: List<Pair<SpeCartItem, ReservationId>>,
+    productTotal: SpeCartOrderSubtotalPrice,
+    summaryPrice: SpeCartSummary,
+    currencyCode: String,
+    orderNumberId: String,
+    orderNumberSource: String,
+    contactDetails: ContactDetails,
+    countryCode: String,
+    languageCode: String,
+    storeId: String,
+    consumerName: String,
+    selectedTimeWindow: CheckoutTimeWindowsResponse?,
+    deliveryArrangementsResponse: CheckoutDeliveryArrangementsResponse?,
+    checkoutTimeWindowId: String?,
+    deliveryPrice: SpeCartOrderSubtotalPrice?
+): OrderCreationRequest
+```
+
+## Parameters
+- **items**: `List<Pair<SpeCartItem, ReservationId>>`  
+  A list of pairs, each consisting of a shopping cart item (`SpeCartItem`) and its associated reservation ID (`ReservationId`).
+
+- **productTotal**: `SpeCartOrderSubtotalPrice`  
+  Represents the subtotal price of the products in the cart, including and excluding savings.
+
+- **summaryPrice**: `SpeCartSummary`  
+  Contains the summary of the cart, including total amounts with and without savings.
+
+- **currencyCode**: `String`  
+  The currency code (e.g., "USD") used for monetary values in the order.
+
+- **orderNumberId**: `String`  
+  A unique identifier for the order number.
+
+- **orderNumberSource**: `String`  
+  The source or system from which the order number originates.
+
+- **contactDetails**: `ContactDetails`  
+  Contains customer contact information, including email and mobile number.
+
+- **countryCode**: `String`  
+  The country code representing the customer's location.
+
+- **languageCode**: `String`  
+  The language code used for notifications and communication.
+
+- **storeId**: `String`  
+  The identifier for the store fulfilling the order.
+
+- **consumerName**: `String`  
+  The name of the consumer or client system initiating the order.
+
+- **selectedTimeWindow**: `CheckoutTimeWindowsResponse?`  
+  The selected time window for delivery, if applicable.
+
+- **deliveryArrangementsResponse**: `CheckoutDeliveryArrangementsResponse?`  
+  The response containing possible delivery arrangements.
+
+- **checkoutTimeWindowId**: `String?`  
+  The identifier for the selected time window during checkout.
+
+- **deliveryPrice**: `SpeCartOrderSubtotalPrice?`  
+  The price details related to delivery services, if applicable.
+
+## Return Value
+- **OrderCreationRequest**  
+  The function returns an `OrderCreationRequest` object, which encapsulates all necessary details for creating an order, including item lines, customer information, payment details, and optional delivery arrangements.
+
+## Functionality
+1. **Order Summary Construction**:  
+   - Constructs `OrderSummary` using both inclusive and exclusive savings from `productTotal` and `summaryPrice`.
+   - Converts subtotal prices and total amounts to `OrderSummaryInclSavings` and `OrderSummaryExclSavings`.
+
+2. **Order Payment Construction**:  
+   - If available, constructs `OrderPayment` using inclusive tax price from `productTotal`.
+
+3. **Customer Notifications**:  
+   - Builds a `Customer` object including email and SMS notifications derived from `contactDetails`.
+
+4. **Delivery Arrangements**:  
+   - Determines if delivery arrangements can be created based on the presence of `deliveryArrangementsResponse`, `selectedTimeWindow`, and `checkoutTimeWindowId`.
+
+5. **Order Creation
+*/
 package fullserve.adapters.orders
 
 import com.ingka.selling.orders.model.BusinessUnitKey
