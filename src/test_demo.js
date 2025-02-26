@@ -1,3 +1,38 @@
+/*
+# Centiro Fetch Module
+
+This module is responsible for fetching data from Centiro, a cloud-based delivery management system. It includes error handling for various scenarios and also includes caching functionality.
+
+## Import Statements
+
+The module imports various configurations, error classes, helper functions, and caching utilities from other modules.
+
+## Constants
+
+The module defines several constants for error codes, error messages, and order sources.
+
+## Functions
+
+### getOrderSourceMapping(locality)
+
+This function takes a locality as an argument and returns the corresponding order source. If the locality does not have an order source mapping, it logs an error and returns the first order source.
+
+### buildUrlDSM(path, retailId)
+
+This function takes a path and a retailId as arguments and returns a URL for the DSM endpoint. The URL is built based on the region obtained from the retailId. If the region is not 'CN', the URL includes the version 'v2' unless the path is 'GetServiceCompatibility'. If the region is 'CN', the URL does not include the version.
+
+### centiroFetch(path, body, requestId, version, retailId, zipCode)
+
+This function is an asynchronous function that takes a path, body, requestId, version, retailId, and zipCode as arguments. It builds a URL and headers for a fetch request, sends the request, and returns the response. If an error occurs during the fetch request, it logs the error and throws a ConnectionError.
+
+## Error Handling
+
+The module includes error handling for various scenarios, such as undefined zip code, undefined originator, undefined service code, unknown TSP time window, no capacity input, invalid request, internal error, temporary failure, no capacity found, and no time window found. It also includes error handling for connection problems with Centiro.
+
+## Caching
+
+The module uses the get and set functions from the redis module for caching.
+*/
 import { Config } from '../config/config';
 import {
   InputError,
