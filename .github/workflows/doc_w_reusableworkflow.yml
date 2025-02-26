@@ -1,0 +1,10 @@
+name: Use Reusable Workflow from Repo code-to-docs
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+jobs:
+  use-reusable-workflow:
+    uses: ingka-group-digital/code-to-docs/.github/workflows/reusable-workflow.yml@main
