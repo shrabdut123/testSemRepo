@@ -19,4 +19,4 @@ jobs:
           curl -X POST -H "Accept: application/vnd.github.v3+json" \
             -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
             https://api.github.com/repos/ingka-group-digital/code-to-docs/actions/workflows/reusable-workflow.yml/dispatches \
-            -d '{"ref":"main", "inputs": {"src-folder": "${{ github.workspace }}/src", "repo-name": "${{ github.repository }}", "branch-name": "main"}}'
+            -d '{"ref":"main", "inputs": {"src-folder": "${{ github.workspace }}/src", "repo-name": "${{ github.repository }}", "branch-name": "main", "token": "${{ secrets.PAT_TOKEN }}"}}'
