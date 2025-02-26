@@ -1,3 +1,38 @@
+/*
+# Centiro Fetch Module
+
+This module is responsible for fetching data from Centiro, a cloud-based delivery management system. It includes error handling for various types of errors that may occur during the fetch process.
+
+## Import Statements
+
+The module imports various configurations, error types, helper functions, and utilities from other modules in the application.
+
+## Constants
+
+The module defines several constants for error codes, error messages, and order sources.
+
+## Functions
+
+### getOrderSourceMapping(locality)
+
+This function takes a locality as an argument and returns the corresponding order source. If the locality does not have an order source mapping, it logs an error and returns the first order source.
+
+### buildUrlDSM(path, retailId)
+
+This function takes a path and a retailId as arguments and returns a URL for the DSM endpoint. The URL is built based on the region corresponding to the retailId. If the region is not 'CN', the URL includes the '/v2' API version. If the region is 'CN', the URL does not include the API version.
+
+### centiroFetch(path, body, requestId, version, retailId, zipCode)
+
+This function is an asynchronous function that fetches data from Centiro. It takes a path, body, requestId, version, retailId, and zipCode as arguments. The function builds the URL for the fetch request based on the DSM endpoint configuration. It sets the 'Content-Type' and 'Accept' headers for the request. The function uses the soFetcher function to make the fetch request and handles any errors that may occur during the fetch process.
+
+## Error Handling
+
+The module includes error handling for various types of errors that may occur during the fetch process, including input errors, connection errors, and other specific error types. The error handling includes logging the error and throwing an error with a specific error code and message.
+
+## Logging
+
+The module uses the Log helper function to log various events and errors. The log entries include information about the event or error, such as the system, URL, payload, response, and other relevant details.
+*/
 import { Config } from '../config/config';
 import {
   InputError,
