@@ -8,7 +8,7 @@ permissions:
   id-token: 'write'
 jobs:
   use-reusable-workflow:
-    uses: ingka-group-digital/code-to-docs/.github/workflows/reusable-workflow.yml@main
+    uses: ingka-group-digital/code-to-docs/.github/workflows/reusable-workflow.yml@0.0.1
     with:
       src-folder: src
       repo-name: ${{ github.repository }}
