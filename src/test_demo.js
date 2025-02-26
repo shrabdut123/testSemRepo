@@ -1,3 +1,34 @@
+/*
+# Centiro Fetch Module
+
+This module is responsible for fetching data from Centiro, a cloud-based delivery management system. It includes error handling for various types of errors that may occur during the fetch process.
+
+## Import Statements
+
+The module imports various configurations, error types, helper functions, and utilities from other modules in the application.
+
+## Constants
+
+The module defines several constants for error codes, error messages, and order sources.
+
+## Functions
+
+### getOrderSourceMapping(locality)
+
+This function takes a locality as an argument and returns the corresponding order source. If the locality does not have an order source mapping, it logs an error and returns the first order source.
+
+### buildUrlDSM(path, retailId)
+
+This function takes a path and a retailId as arguments and returns a URL for the DSM endpoint. The URL is built based on the region corresponding to the retailId. If the region is not 'CN', the URL includes the version 'v2' for all paths except 'GetServiceCompatibility'. If the region is 'CN', the URL does not include the version.
+
+### centiroFetch(path, body, requestId, version, retailId, zipCode)
+
+This function is responsible for fetching data from Centiro. It takes a path, body, requestId, version, retailId, and zipCode as arguments. It builds the URL for the fetch request based on whether the DSM feature is enabled in the configuration. It sets the headers for the request and sends a POST request to the URL with the body. If an error occurs during the fetch process, it logs the error and throws a ConnectionError.
+
+## Error Handling
+
+The module includes error handling for various types of errors that may occur during the fetch process, including input errors, connection errors, and specific errors related to zip codes, business units, service codes, localities, and capacity. It defines error codes and error messages for these errors.
+*/
 import { Config } from '../config/config';
 import {
   InputError,
