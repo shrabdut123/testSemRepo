@@ -34,3 +34,14 @@ jobs:
           git add . # Add modified files
           git commit -m "Auto-generated documentation using AI"
           git push --set-upstream origin update-caller-repo-files-${GITHUB_SHA}-${GITHUB_RUN_NUMBER} # Push the new branch to Repository
+
+      - name: Create Pull Request in Caller repository
+        run: |
+            curl -X POST -H "Authorization: token ${{ secrets.PAT_TOKEN }}" \
+            -d '{
+                  "title": "Update files in src folder",
+                  "head": "update-caller-repo-files-${GITHUB_SHA}-${GITHUB_RUN_NUMBER}",
+                  "base": "main",
+                  "body": "Automated pull request to update files in src folder from script."
+                }' \
+            https://api.github.com/repos/shrabdut123/testSemRepo/pulls
