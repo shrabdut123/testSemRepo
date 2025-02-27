@@ -38,7 +38,7 @@ function addNumbers(a, b) {
     return a + b;
 }
 
-const num1 = 5;
+const num1 = 50;
 const num2 = 100;
 console.log(`The sum of ${num1} and ${num2} is:`, addNumbers(num1, num2));
 
