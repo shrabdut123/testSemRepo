@@ -1,38 +1,40 @@
 /*
-# Documentation for `addNumbers` function
+# Documentation for subtractNumbers function
 
 ## Function
 
-### `addNumbers(a, b)`
+### subtractNumbers(a, b)
 
-This function takes two numbers as arguments and returns their sum.
+This function subtracts two numbers and returns the result.
 
 #### Parameters
 
-- `a` (Number): The first number to be added.
-- `b` (Number): The second number to be added.
+- `a` (Number): The first number to subtract from.
+- `b` (Number): The second number to be subtracted.
 
 #### Returns
 
-- (Number): The sum of `a` and `b`.
+- (Number): The result of the subtraction of `b` from `a`.
 
-## Example
+#### Example
 
 ```js
 const num1 = 50;
-const num2 = 100;
-console.log(`The sum of ${num1} and ${num2} is:`, addNumbers(num1, num2));
+const num2 = 10;
+console.log(`The diff of ${num1} and ${num2} is:`, subtractNumbers(num1, num2));
 ```
 
-In this example, the function `addNumbers` is called with `num1` and `num2` as arguments. The sum of `num1` and `num2` is then logged to the console.
+This will log: "The diff of 50 and 10 is: 40"
 
 ## Module Exports
 
-The `addNumbers` function is exported as a module, which means it can be imported and used in other JavaScript files.
+The `subtractNumbers` function is exported as a module.
 
 ```js
-module.exports = addNumbers;
+module.exports = subtractNumbers;
 ```
+
+This allows it to be imported and used in other JavaScript files.
 */
 function subtractNumbers(a, b) {
     return a - b;

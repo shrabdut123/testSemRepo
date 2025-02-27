@@ -3,37 +3,35 @@
 
 This package provides a function to create an order request.
 
+## Import Statements
+
+The package imports various models and functions from the `com.ingka.selling.orders.model` and `fullserve.adapters.orders.models` packages, among others.
+
 ## Function: createOrderRequest
 
-This function is used to create an order request.
+This function is used to create an order request. It takes in several parameters:
 
-### Parameters:
+- `items`: A list of pairs, each containing a `SpeCartItem` and a `ReservationId`.
+- `productTotal`: The subtotal price of the cart order.
+- `summaryPrice`: The summary of the cart price.
+- `currencyCode`: The code of the currency being used.
+- `orderNumberId`: The ID of the order number.
+- `orderNumberSource`: The source of the order number.
+- `contactDetails`: The contact details of the customer.
+- `countryCode`: The code of the country.
+- `languageCode`: The code of the language.
+- `storeId`: The ID of the store.
+- `consumerName`: The name of the consumer.
+- `selectedTimeWindow`: The selected time window for delivery.
+- `deliveryArrangementsResponse`: The response of the delivery arrangements.
+- `checkoutTimeWindowId`: The ID of the checkout time window.
+- `deliveryPrice`: The price of the delivery.
 
-- `items`: A list of pairs of `SpeCartItem` and `ReservationId`. `SpeCartItem` represents a specific item in the cart and `ReservationId` is the unique identifier for the reservation of the item.
-- `productTotal`: An instance of `SpeCartOrderSubtotalPrice` which represents the subtotal price of the order.
-- `summaryPrice`: An instance of `SpeCartSummary` which represents the summary of the cart price.
-- `currencyCode`: A string representing the currency code.
-- `orderNumberId`: A string representing the order number id.
-- `orderNumberSource`: A string representing the order number source.
-- `contactDetails`: An instance of `ContactDetails` which contains the contact details of the customer.
-- `countryCode`: A string representing the country code.
-- `languageCode`: A string representing the language code.
-- `storeId`: A string representing the store id.
-- `consumerName`: A string representing the consumer name.
-- `selectedTimeWindow`: An instance of `CheckoutTimeWindowsResponse` which represents the selected time window for delivery.
-- `deliveryArrangementsResponse`: An instance of `CheckoutDeliveryArrangementsResponse` which represents the delivery arrangements response.
-- `checkoutTimeWindowId`: A string representing the checkout time window id.
-- `deliveryPrice`: An instance of `SpeCartOrderSubtotalPrice` which represents the delivery price.
+The function returns an `OrderCreationRequest` object.
 
-### Returns:
+The function first creates an `OrderSummary` object, which includes savings and coupons information. Then, it creates an `OrderPayment` object, which includes payment details.
 
-- `OrderCreationRequest`: An instance of `OrderCreationRequest` which represents the order creation request.
-
-### Exceptions:
-
-- `DeliveryLineNotFoundException`: This exception is thrown when the delivery line is not found.
-- `DeliveryPriceException`: This exception is thrown when there is an issue with the delivery price.
-- `PickUpPointNotFoundException`: This exception is thrown when the pickup point is not found.
+Please note that the provided code snippet is incomplete, and the full implementation of the `createOrderRequest` function is not shown.
 */
 package fullserve.adapters.orders
 
