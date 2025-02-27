@@ -145,7 +145,7 @@ fun createOrderRequest(
         if (deliveryArrangementsResponse != null && selectedTimeWindow != null && checkoutTimeWindowId != null) {
             createDeliveryArrangements(deliveryArrangementsResponse, selectedTimeWindow, deliveryPrice, currencyCode, checkoutTimeWindowId)
         } else {
-            null
+            []
         }
 
     return OrderCreationRequest(
