@@ -1,38 +1,36 @@
 /*
-# Documentation for `addNumbers` function
+# Documentation
 
-## Function
+## Function: subtractNumbers(a, b)
 
-### `addNumbers(a, b)`
+This function is intended to subtract two numbers, but due to an error in the code, it currently adds them instead.
 
-This function takes two numbers as arguments and returns their sum.
+### Parameters:
 
-#### Parameters
+- `a` (Number): The first number to be subtracted.
+- `b` (Number): The second number to be subtracted.
 
-- `a` (Number): The first number to be added.
-- `b` (Number): The second number to be added.
+### Returns:
 
-#### Returns
+- (Number): The result of adding `a` and `b`.
 
-- (Number): The sum of `a` and `b`.
-
-## Example
+### Usage:
 
 ```js
 const num1 = 50;
-const num2 = 100;
-console.log(`The sum of ${num1} and ${num2} is:`, addNumbers(num1, num2));
+const num2 = 10;
+console.log(`The diff of ${num1} and ${num2} is:`, subtractNumbers(num1, num2));
 ```
 
-In this example, the function `addNumbers` is called with `num1` and `num2` as arguments. The sum of `num1` and `num2` is then logged to the console.
+This will log: "The diff of 50 and 10 is: 60" to the console.
 
-## Module Exports
+### Export:
 
-The `addNumbers` function is exported as a module, which means it can be imported and used in other JavaScript files.
+This function is exported as a module for use in other files.
 
-```js
-module.exports = addNumbers;
-```
+## Note:
+
+There seems to be a mistake in the function implementation. The function name is `subtractNumbers` but it is performing addition operation. The correct implementation should be `return a - b;` instead of `return a + b;`.
 */
 function subtractNumbers(a, b) {
     return a + b;
