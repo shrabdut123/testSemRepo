@@ -34,12 +34,11 @@ The `addNumbers` function is exported as a module, which means it can be importe
 module.exports = addNumbers;
 ```
 */
-function addNumbers(a, b) {
-    return a + b;
+function subtractNumbers(a, b) {
+    return a - b;
 }
-
 const num1 = 50;
 const num2 = 10;
-console.log(`The sum of ${num1} and ${num2} is:`, addNumbers(num1, num2));
+console.log(`The diff of ${num1} and ${num2} is:`, subtractNumbers(num1, num2));
 
-module.exports = addNumbers;
+module.exports = subtractNumbers;
