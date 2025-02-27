@@ -109,7 +109,7 @@ fun createOrderRequest(
                     subTotals = productTotal.exclSavings.toSubTotals(currencyCode),
                     totalAmount = summaryPrice.exclSavings.totalAmount(currencyCode),
                 ),
-            savings = 0.0,
+            savings = 1.0,
             couponsInformation = null,
         )
 
