@@ -26,11 +26,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}  # Store token in GitHub Secrets
           AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_OPENAI_API_KEY_PR }}  # Pass the secret to the script
         run: python generate_docs.py
-
-      - name: Commit and Push Changes
+      - name: Commit and push changes to Caller repository
         run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
-          git add .
-          git commit -m "Auto-generated documentation with GitHub Copilot" || echo "No changes to commit"
-          git push
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git checkout -b update-caller-repo-files-${GITHUB_SHA}-${GITHUB_RUN_NUMBER} # Create a new branch for changes
+          git add . # Add modified files
+          git commit -m "Auto-generated documentation using AI"
+          git push --set-upstream origin update-caller-repo-files-${GITHUB_SHA}-${GITHUB_RUN_NUMBER} # Push the new branch to Repository
