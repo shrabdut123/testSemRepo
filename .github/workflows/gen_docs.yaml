@@ -1,5 +1,6 @@
 name: Auto-Generate Docs with Copilot
 on:
+  workflow_dispatch:
   push:
     paths:
       - "src/**/*.kt"  # Run when Kotlin files change
