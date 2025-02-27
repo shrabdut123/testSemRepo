@@ -23,6 +23,7 @@ jobs:
       - name: Generate Documentation with Copilot
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}  # Store token in GitHub Secrets
+          AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_OPENAI_API_KEY }}  # Pass the secret to the script
         run: python generate_docs.py
 
       - name: Commit and Push Changes
