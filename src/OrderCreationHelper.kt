@@ -34,6 +34,10 @@ This function is used to create an order request.
 - `DeliveryLineNotFoundException`: This exception is thrown when the delivery line is not found.
 - `DeliveryPriceException`: This exception is thrown when there is an issue with the delivery price.
 - `PickUpPointNotFoundException`: This exception is thrown when the pickup point is not found.
+
+### Usage:
+
+This function is used to create an order request with the provided parameters. It calculates the order summary and order payment details and returns an `OrderCreationRequest` object.
 */
 package fullserve.adapters.orders
 
