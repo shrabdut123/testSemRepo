@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - "src/**/*.kt"  # Run when Kotlin files change
+      - "src/**/*" 
 
 jobs:
   generate_docs:
