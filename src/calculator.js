@@ -9,18 +9,18 @@ This function takes two numbers as arguments and returns their sum.
 
 #### Parameters
 
-- `a` (Number): The first number to be added.
-- `b` (Number): The second number to be added.
+- `a` (number): The first number to be added.
+- `b` (number): The second number to be added.
 
 #### Returns
 
-- (Number): The sum of `a` and `b`.
+- (number): The sum of `a` and `b`.
 
 ## Example
 
 ```js
 const num1 = 50;
-const num2 = 100;
+const num2 = 10;
 console.log(`The sum of ${num1} and ${num2} is:`, addNumbers(num1, num2));
 ```
 
