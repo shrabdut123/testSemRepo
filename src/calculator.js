@@ -1,38 +1,35 @@
 /*
-# Documentation for `addNumbers` function
+# Documentation
 
-## Function
-
-### `addNumbers(a, b)`
+## Function: addNumbers(a, b)
 
 This function takes two numbers as arguments and returns their sum.
 
-#### Parameters
+### Parameters:
 
 - `a` (Number): The first number to be added.
 - `b` (Number): The second number to be added.
 
-#### Returns
+### Returns:
 
 - (Number): The sum of `a` and `b`.
 
-## Example
+### Example:
 
 ```js
 const num1 = 50;
-const num2 = 100;
-console.log(`The sum of ${num1} and ${num2} is:`, addNumbers(num1, num2));
+const num2 = 10;
+console.log(`The sum of ${num1} and ${num2} is:`, addNumbers(num1, num2)); // Outputs: The sum of 50 and 10 is: 60
 ```
 
-In this example, the function `addNumbers` is called with `num1` and `num2` as arguments. The sum of `num1` and `num2` is then logged to the console.
+## Constants:
 
-## Module Exports
+- `num1` (Number): A constant that holds the value 50.
+- `num2` (Number): A constant that holds the value 10.
 
-The `addNumbers` function is exported as a module, which means it can be imported and used in other JavaScript files.
+## Module Exports:
 
-```js
-module.exports = addNumbers;
-```
+- `addNumbers`: This function is exported for use in other modules.
 */
 function addNumbers(a, b) {
     return a + b;
