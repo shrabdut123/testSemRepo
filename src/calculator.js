@@ -20,7 +20,7 @@ This function takes two numbers as arguments and returns their sum.
 
 ```js
 const num1 = 50;
-const num2 = 100;
+const num2 = 10;
 console.log(`The sum of ${num1} and ${num2} is:`, addNumbers(num1, num2));
 ```
 
@@ -28,10 +28,10 @@ In this example, the function `addNumbers` is called with `num1` and `num2` as a
 
 ## Module Exports
 
-The `addNumbers` function is exported as a module, which means it can be imported and used in other JavaScript files.
+The `addNumbers` function is exported as a module, which means it can be imported and used in other JavaScript files using the `require` function.
 
 ```js
-module.exports = addNumbers;
+const addNumbers = require('./addNumbers');
 ```
 */
 function addNumbers(a, b) {
