@@ -2,12 +2,13 @@ name: Generate Documentation
 on:
   workflow_dispatch:
 
-permissions:
-  contents: read
-  id-token: write
 jobs:
   use-reusable-workflow:
-    uses: ingka-group-digital/code-to-docs/.github/workflows/reusable-workflow.yml@0.0.1
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    uses: ingka-group-digital/code-to-docs/.github/workflows/reusable-workflow.yml@0.0.2
     with:
       src-folder: src
       repo-name: ${{ github.repository }}
