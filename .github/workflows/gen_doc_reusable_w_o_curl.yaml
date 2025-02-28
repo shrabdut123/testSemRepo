@@ -3,9 +3,8 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: 'read'
-  actions: 'write'
-  id-token: 'write'
+  contents: read
+  id-token: write
 jobs:
   use-reusable-workflow:
     uses: ingka-group-digital/code-to-docs/.github/workflows/reusable-workflow.yml@0.0.1
