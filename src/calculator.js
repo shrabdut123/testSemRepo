@@ -20,7 +20,7 @@ This function takes two numbers as arguments and returns their sum.
 
 ```js
 const num1 = 50;
-const num2 = 100;
+const num2 = 10;
 console.log(`The sum of ${num1} and ${num2} is:`, addNumbers(num1, num2));
 ```
 
